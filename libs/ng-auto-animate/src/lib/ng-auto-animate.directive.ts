@@ -1,6 +1,10 @@
-import { AfterViewInit, Directive, ElementRef, Input, inject } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, InjectionToken, Input, inject } from '@angular/core';
 import autoAnimate, { AutoAnimateOptions } from '@formkit/auto-animate';
 
+export const GLOBAL_AUTO_ANIMATE_OPTIONS = new InjectionToken<Partial<AutoAnimateOptions>>(
+  'Global AutoAnimate Options', {
+  factory: () => ({}),
+});
 
 @Directive({
   selector: '[auto-animate]',
@@ -8,10 +12,14 @@ import autoAnimate, { AutoAnimateOptions } from '@formkit/auto-animate';
 })
 export class NgAutoAnimateDirective implements AfterViewInit {
   private el = inject(ElementRef);
+  private globalOptions = inject(GLOBAL_AUTO_ANIMATE_OPTIONS);
 
   @Input('auto-animate')
   set options(_options: Partial<AutoAnimateOptions> | '') {
-    this._options = typeof _options === 'string' ? {} : _options;
+    this._options = {
+      ...this.globalOptions,
+      ...(typeof _options === 'string' ? {} : _options),
+    };
   }
   get options() {
     return this._options;
@@ -19,7 +27,6 @@ export class NgAutoAnimateDirective implements AfterViewInit {
   private _options: Partial<AutoAnimateOptions> = {};
 
   ngAfterViewInit(): void {
-    this.options = typeof this.options === 'string' ? {} : this.options;
     autoAnimate(this.el.nativeElement, { ...this.options });
   }
 }
