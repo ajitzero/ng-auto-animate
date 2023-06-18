@@ -45,6 +45,13 @@
           "libs/ng-auto-animate/**/*.html"
         ]
       }
+    },
+    "deploy": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
+      }
     }
   }
 }
