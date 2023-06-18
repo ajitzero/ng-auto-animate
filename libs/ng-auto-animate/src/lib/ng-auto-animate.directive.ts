@@ -15,7 +15,7 @@ export class NgAutoAnimateDirective implements AfterViewInit {
   private globalOptions = inject(GLOBAL_AUTO_ANIMATE_OPTIONS);
 
   @Input('auto-animate')
-  set options(_options: Partial<AutoAnimateOptions> | '') {
+  set explicitOptions(_options: Partial<AutoAnimateOptions> | string) {
     this._options = {
       ...this.globalOptions,
       ...(typeof _options === 'string' ? {} : _options),
@@ -27,6 +27,6 @@ export class NgAutoAnimateDirective implements AfterViewInit {
   private _options: Partial<AutoAnimateOptions> = {};
 
   ngAfterViewInit(): void {
-    autoAnimate(this.el.nativeElement, { ...this.options });
+    autoAnimate(this.el.nativeElement, this.options);
   }
 }
