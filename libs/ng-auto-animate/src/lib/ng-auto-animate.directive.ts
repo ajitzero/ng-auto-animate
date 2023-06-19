@@ -25,7 +25,7 @@ export class NgAutoAnimateDirective implements AfterViewInit {
     } else {
       // When either some options or a plugin is passed
       if (isPlugin(this.globalOptions) || isPlugin(_options)) {
-        // A plugin must replace any previously set options or plugin. 
+        // A plugin must replace any previously set options or plugin.
         // A plugin must be replaced by options or another plugin.
         this._options = _options;
       } else {

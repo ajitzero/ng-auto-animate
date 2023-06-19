@@ -4,6 +4,14 @@ import { RouterModule } from '@angular/router';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
 import { NgAutoAnimateDirective } from 'ng-auto-animate';
 
+type KeyframeProps = {
+  transform: string;
+  opacity?: number;
+  offset?: number;
+  width?: string;
+  height?: string;
+};
+
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, NgAutoAnimateDirective],
@@ -21,8 +29,10 @@ import { NgAutoAnimateDirective } from 'ng-auto-animate';
         <header auto-animate> <!-- Global default settings -->
           <a *ngIf="start" href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">📝 View README (Slow transition, from global default settings)</a>
         </header>
-        <button (click)="show = !show">Toggle (Custom plugin)</button>
-        <button (click)="shuffle()">Shuffle (Explicit, inline settings)</button>
+        <div class="grid">
+          <button (click)="show = !show">Toggle (Custom plugin)</button>
+          <button (click)="shuffle()">Shuffle (Explicit, inline settings)</button>
+        </div>
         <footer [auto-animate]="bouncyPlugin"> <!-- Custom plugin -->
           <h3>Footer content</h3>
           <div *ngIf="show" [auto-animate]="{ duration: 250 }"> <!-- Explicit, inline setting -->
@@ -56,14 +66,14 @@ export class AppComponent {
    * showcased in the the library's documentation.
    */
   bouncyPlugin: AutoAnimationPlugin = (el, action, oldCoords, newCoords) => {
-    let keyframes
+    let keyframes: KeyframeProps[] = [];
     // supply a different set of keyframes for each action
     if (action === 'add') {
       keyframes = [
         { transform: 'scale(0)', opacity: 0 },
         { transform: 'scale(1.15)', opacity: 1, offset: 0.75 },
         { transform: 'scale(1)', opacity: 1 }
-      ]
+      ];
     }
     // keyframes can have as many "steps" as you prefer
     // and you can use the 'offset' key to tune the timing
@@ -73,36 +83,35 @@ export class AppComponent {
         { transform: 'scale(1.15)', opacity: 1, offset: 0.33 },
         { transform: 'scale(0.75)', opacity: 0.1, offset: 0.5 },
         { transform: 'scale(0.5)', opacity: 0 }
-      ]
+      ];
     }
     if (action === 'remain' && oldCoords !== undefined && newCoords !== undefined) {
       // for items that remain, calculate the delta
       // from their old position to their new position
-      const deltaX = oldCoords.left - newCoords?.left
-      const deltaY = oldCoords.top - newCoords?.top
+      const deltaX = oldCoords.left - newCoords?.left;
+      const deltaY = oldCoords.top - newCoords?.top;
       // use the getTransitionSizes() helper function to
       // get the old and new widths of the elements
-      const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords)
+      const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords);
       // set up our steps with our positioning keyframes
-      const start: any = { transform: `translate(${deltaX}px, ${deltaY}px)` }
-      const mid: any = { transform: `translate(${deltaX * -0.15}px, ${deltaY * -0.15}px)`, offset: 0.75 }
-      const end: any = { transform: `translate(0, 0)` }
+      const start: KeyframeProps = { transform: `translate(${deltaX}px, ${deltaY}px)` };
+      const mid: KeyframeProps = { transform: `translate(${deltaX * -0.15}px, ${deltaY * -0.15}px)`, offset: 0.75 };
+      const end: KeyframeProps = { transform: `translate(0, 0)` };
       // if the dimensions changed, animate them too.
       if (widthFrom !== widthTo) {
-        start.width = `${widthFrom}px`
-        mid.width = `${widthFrom >= widthTo ? widthTo / 1.05 : widthTo * 1.05}px`
-        end.width = `${widthTo}px`
+        start.width = `${widthFrom}px`;
+        mid.width = `${widthFrom >= widthTo ? widthTo / 1.05 : widthTo * 1.05}px`;
+        end.width = `${widthTo}px`;
       }
       if (heightFrom !== heightTo) {
-        start.height = `${heightFrom}px`
-        mid.height = `${heightFrom >= heightTo ? heightTo / 1.05 : heightTo * 1.05}px`
-        end.height = `${heightTo}px`
+        start.height = `${heightFrom}px`;
+        mid.height = `${heightFrom >= heightTo ? heightTo / 1.05 : heightTo * 1.05}px`;
+        end.height = `${heightTo}px`;
       }
-      keyframes = [start, mid, end]
+      keyframes = [start, mid, end];
     }
     // return our KeyframeEffect() and pass
     // it the chosen keyframes.
-    if (keyframes === undefined) throw new Error('No keyframes defined');
     return new KeyframeEffect(el, keyframes, { duration: 600, easing: 'ease-out' });
   };
 }
