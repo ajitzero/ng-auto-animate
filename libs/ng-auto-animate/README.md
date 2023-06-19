@@ -80,7 +80,7 @@ If there is a simpler solution, I would be willing to submit a PR with my change
 
 ### Missing support for something?
 
-Go through existing issues if your problem is already being tracked; otherwise, [raise an issue!](https://github.com/ajitzero/ng-auto-animate/issues/new)
+Go through existing issues if your problem is already being tracked; otherwise, [raise an issue!](https://github.com/ajitzero/ng-auto-animate/issues/new/choose)
 
 ### License
 
