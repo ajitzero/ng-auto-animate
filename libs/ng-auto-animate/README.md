@@ -1,18 +1,17 @@
 # ng-auto-animate
 
-An Angular Directive to use FormKit's [auto-animate](https://auto-animate.formkit.com) library, within Angular projects.
+An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.formkit.com) library, within Angular projects.
 
 ### Highlights:
 - ✅ Standalone Directive, for Angular v14 and above. Tested on Node 18.x, but should work on previous versions.
-- ✅ Custom `InjectionToken` for configuring global settings.
-- 🚫 Currently, it does not support [plugins](https://auto-animate.formkit.com/#plugins). WIP: See [#5](https://github.com/ajitzero/ng-auto-animate/issues/5).
+- ✅ Custom `InjectionToken` for configuring global settings and plugins.
 
 ### Why a new wrapper library?
-A publishable library for Angular needs `ng-packr` and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial ask, and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
+A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial ask, and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
 
-[Justin Schroeder](https://github.com/justin-schroeder), the creator of `auto-animate`, has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts and the project structure, all to support a single framework.
+[Justin Schroeder](https://github.com/justin-schroeder), the creator of [`auto-animate`](https://auto-animate.formkit.com), has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts and the project structure, all to support a single framework.
 
-If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project.
+If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project, especially the support fot global options/plugin via an `InjectionToken`.
 
 ### Installation
 1. Install the peer dependency.
@@ -76,6 +75,14 @@ If there is a simpler solution, I would be willing to submit a PR with my change
         {{ paragraph }}
       </p>
     </article>
+    ```
+1. Pass a custom plugin
+    > See example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/db96f472e479b21167853c644483a90b18c2b513/apps/demo/src/app/app.component.ts#L68).
+    ```ts
+    customPlugin: AutoAnimationPlugin = (...) => {...};
+    ```
+    ```html
+    <article [auto-animate]="customPlugin">...</article>
     ```
 
 ### Missing support for something?
