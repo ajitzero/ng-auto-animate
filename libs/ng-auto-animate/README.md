@@ -77,7 +77,7 @@ If there is a simpler solution, I would be willing to submit a PR with my change
     </article>
     ```
 1. Pass a custom plugin
-    > See example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/db96f472e479b21167853c644483a90b18c2b513/apps/demo/src/app/app.component.ts#L68).
+    > See the example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/0f305d97a9a30ab715b1c41304572519f0d27894/apps/demo/src/app/app.component.ts#L68) for a "bouncy" effect.
     ```ts
     customPlugin: AutoAnimationPlugin = (...) => {...};
     ```
