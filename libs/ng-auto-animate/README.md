@@ -1,17 +1,17 @@
 # ng-auto-animate
 
-An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.formkit.com) library, within Angular projects.
+An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.formkit.com) library within Angular projects.
 
 ### Highlights:
 - ✅ Standalone Directive, for Angular v14 and above. Tested on Node 18.x, but should work on previous versions.
 - ✅ Custom `InjectionToken` for configuring global settings and plugins.
 
 ### Why a new wrapper library?
-A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial ask, and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
+A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial task and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
 
 [Justin Schroeder](https://github.com/justin-schroeder), the creator of [`auto-animate`](https://auto-animate.formkit.com), has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts and the project structure, all to support a single framework.
 
-If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project, especially the support fot global options/plugin via an `InjectionToken`.
+If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project, especially the support for global options/plugin via an `InjectionToken`.
 
 ### Installation
 1. Install the peer dependency.
@@ -24,6 +24,12 @@ If there is a simpler solution, I would be willing to submit a PR with my change
     ```
 
 ### Usage
+#### Principle
+Add the directive to the parent tag, within which DOM elements are being shown or hidden dynamically.
+
+Adding the directive to the same tag which is being hidden will do nothing since it will look for changes in child nodes only.
+
+#### Variants
 1. Default usage:
     ```html
     <article auto-animate>
