@@ -4,6 +4,10 @@ import { RouterModule } from '@angular/router';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
 import { NgAutoAnimateDirective } from 'ng-auto-animate';
 
+/*
+ * This is a helper type only. The original example is in JavaScript, not TypeScript, so no type is exported.
+ * Actual values can be any CSS properties.
+ */
 type KeyframeProps = {
   transform: string;
   opacity?: number;
@@ -26,16 +30,16 @@ type KeyframeProps = {
       <button (click)="start = !start">Start</button>
 
       <article>
-        <header auto-animate> <!-- Global default settings -->
+        <header auto-animate> <!-- Global default settings: Affects the <a *ngIf> below -->
           <a *ngIf="start" href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">📝 View README (Slow transition, from global default settings)</a>
         </header>
         <div class="grid">
           <button (click)="show = !show">Toggle (Custom plugin)</button>
           <button (click)="shuffle()">Shuffle (Explicit, inline settings)</button>
         </div>
-        <footer [auto-animate]="bouncyPlugin"> <!-- Custom plugin -->
+        <footer [auto-animate]="bouncyPlugin"> <!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->
           <h3>Footer content</h3>
-          <div *ngIf="show" [auto-animate]="{ duration: 250 }"> <!-- Explicit, inline setting -->
+          <div *ngIf="show" [auto-animate]="{ duration: 250 }"> <!-- Explicit, inline setting: Affects the <p *ngFor> below -->
             <p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
           </div>
         </footer>
@@ -44,7 +48,6 @@ type KeyframeProps = {
   `,
 })
 export class AppComponent {
-  title = 'Demo';
   start = false;
   show = false;
 
@@ -57,13 +60,16 @@ export class AppComponent {
 
   shuffle() {
     if (this.show) {
-      this.paragraphs = this.paragraphs.sort(() => Math.random() - 0.5);
+      // Replace `Array.prototype.sort()` with `Array.prototype.toSorted()` when it's stable
+      this.paragraphs = [...this.paragraphs].sort(() => Math.random() - 0.5);
     }
   }
 
   /**
    * This example plugin is a modified version of the "bouncy" plugin
-   * showcased in the the library's documentation.
+   * showcased in the library's documentation.
+   *
+   * @see https://auto-animate.formkit.com/#plugins
    */
   bouncyPlugin: AutoAnimationPlugin = (el, action, oldCoords, newCoords) => {
     let keyframes: KeyframeProps[] = [];
