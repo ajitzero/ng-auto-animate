@@ -45,6 +45,12 @@
           "libs/ng-auto-animate/**/*.html"
         ]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ng-auto-animate"
+      }
     }
   }
 }
