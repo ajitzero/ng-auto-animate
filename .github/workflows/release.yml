@@ -9,7 +9,7 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - name: Install deps
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Lint
         run: npx nx run-many -t lint
       - name: Test
