@@ -58,7 +58,7 @@
     "nx": "^16.5.2",
     "nx-cloud": "latest",
     "nx-release": "^3.1.5",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.31",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
     "postcss-url": "~10.1.3",
