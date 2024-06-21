@@ -49,12 +49,12 @@ type KeyframeProps = {
 					<!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->
 					<h3>Footer content</h3>
 					@if (showList()) {
-						<div [auto-animate]="{ duration: 250 }">
+						<ol [auto-animate]="{ duration: 250 }">
 							<!-- Explicit, inline setting: Affects the <p *ngFor> below -->
-							@for (paragraph of paragraphs(); track paragraph) {
-								<p>{{ paragraph }}</p>
+							@for (paragraph of paragraphs(); track paragraph.id) {
+								<li>{{ paragraph.desc }}</li>
 							}
-						</div>
+						</ol>
 					}
 				</footer>
 			</article>
@@ -66,10 +66,10 @@ export class AppComponent {
 	showList = signal(false);
 
 	paragraphs = signal([
-		'1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-		'2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-		'3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-		'4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+		{ id: '1', desc: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+		{ id: '2', desc: 'random lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+		{ id: '3', desc: 'ipsum dolor sit amet, consectetur adipiscing elit.' },
+		{ id: '4', desc: 'dolor sit amet, consectetur adipiscing elit.' },
 	]);
 
 	toggleStart = () => this.showIntro.set(!this.showIntro());
