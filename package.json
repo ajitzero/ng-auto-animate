@@ -1,12 +1,11 @@
 {
-	"name": "@ng-auto-animate/source",
-	"version": "0.3.0",
+	"name": "ng-auto-animate",
+	"version": "0.3.2",
 	"license": "MIT",
 	"scripts": {
 		"clean": "rimraf dist ./node_modules ./.angular",
 		"format": "prettier -w --cache **.{ts,js,json,html,scss,css}"
 	},
-	"private": true,
 	"dependencies": {
 		"@angular/animations": "18.0.4",
 		"@angular/common": "18.0.4",
