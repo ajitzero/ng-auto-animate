@@ -37,9 +37,16 @@ Add the directive to the parent tag, within which DOM elements are being shown o
 
 Adding the directive to the same tag which is being hidden will do nothing since it will look for changes in child nodes only.
 
+### Import Path
+
+Import and add the directive to your module or standalone component's imports array.
+```ts
+import { NgAutoAnimateDirective } from 'ng-auto-animate'; 
+```
+
 ### Variants
 
-1. Default usage:
+1. **Default usage.** This uses the default values configured by `@formkit/auto-animate`.
 
     ```html
     <article auto-animate>
@@ -49,7 +56,7 @@ Adding the directive to the same tag which is being hidden will do nothing since
     </article>
     ```
 
-1. Pass one-off options:
+1. **Pass one-off options.** Inline options will completely replace/override the default options.
 
     ```html
     <article [auto-animate]="{ duration: 750 }">
@@ -59,7 +66,7 @@ Adding the directive to the same tag which is being hidden will do nothing since
     </article>
     ```
 
-1. Configure global default options:
+1. **Global options.** The ideal place to configure common settings across your app.
 
     ```ts
     // src/app/app.config.ts
@@ -98,7 +105,7 @@ Adding the directive to the same tag which is being hidden will do nothing since
     </article>
     ```
 
-1. Pass a custom plugin
+1. **Custom plugins.** Same support as `@formkit/auto-animate`.
     > See the example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/0f305d97a9a30ab715b1c41304572519f0d27894/apps/demo/src/app/app.component.ts#L68) for a "bouncy" effect.
 
     ```ts
