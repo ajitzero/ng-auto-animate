@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
 import { NgAutoAnimateDirective } from 'ng-auto-animate';
@@ -17,6 +17,7 @@ type KeyframeProps = {
 
 @Component({
 	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [RouterModule, NgAutoAnimateDirective],
 	selector: 'ng-auto-animate-root',
 	template: `
@@ -29,28 +30,28 @@ type KeyframeProps = {
 				<h3>Wrapper around FormKit's Auto Animate library</h3>
 			</hgroup>
 
-			<button (click)="start = !start">Start</button>
+			<button (click)="toggleStart()">Start</button>
 
 			<article>
 				<header auto-animate>
 					<!-- Global default settings: Affects the <a *ngIf> below -->
-					@if (start) {
+					@if (showIntro()) {
 						<a href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">
 							📝 View README (Slow transition, from global default settings)
 						</a>
 					}
 				</header>
 				<div class="grid">
-					<button (click)="show = !show">Toggle (Custom plugin)</button>
-					<button (click)="shuffle()">Shuffle (Explicit, inline settings)</button>
+					<button (click)="toggleList()">Toggle (Custom plugin)</button>
+					<button (click)="shuffle()" [disabled]="!showList()">Shuffle (Explicit, inline settings)</button>
 				</div>
 				<footer [auto-animate]="bouncyPlugin">
 					<!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->
 					<h3>Footer content</h3>
-					@if (show) {
+					@if (showList()) {
 						<div [auto-animate]="{ duration: 250 }">
 							<!-- Explicit, inline setting: Affects the <p *ngFor> below -->
-							@for (paragraph of paragraphs; track paragraph) {
+							@for (paragraph of paragraphs(); track paragraph) {
 								<p>{{ paragraph }}</p>
 							}
 						</div>
@@ -61,20 +62,23 @@ type KeyframeProps = {
 	`,
 })
 export class AppComponent {
-	start = false;
-	show = false;
+	showIntro = signal(false);
+	showList = signal(false);
 
-	paragraphs = [
+	paragraphs = signal([
 		'1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 		'2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 		'3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 		'4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-	];
+	]);
+
+	toggleStart = () => this.showIntro.set(!this.showIntro());
+	toggleList = () => this.showList.set(!this.showList());
 
 	shuffle() {
-		if (this.show) {
+		if (this.showList()) {
 			// Replace `Array.prototype.sort()` with `Array.prototype.toSorted()` when it's stable
-			this.paragraphs = [...this.paragraphs].sort(() => Math.random() - 0.5);
+			this.paragraphs.set([...this.paragraphs()].sort(() => Math.random() - 0.5));
 		}
 	}
 
