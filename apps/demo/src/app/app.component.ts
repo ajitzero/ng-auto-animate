@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
@@ -18,7 +17,7 @@ type KeyframeProps = {
 
 @Component({
 	standalone: true,
-	imports: [CommonModule, RouterModule, NgAutoAnimateDirective],
+	imports: [RouterModule, NgAutoAnimateDirective],
 	selector: 'ng-auto-animate-root',
 	template: `
 		<main class="container">
@@ -35,9 +34,11 @@ type KeyframeProps = {
 			<article>
 				<header auto-animate>
 					<!-- Global default settings: Affects the <a *ngIf> below -->
-					<a *ngIf="start" href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">
-						📝 View README (Slow transition, from global default settings)
-					</a>
+					@if (start) {
+						<a href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">
+							📝 View README (Slow transition, from global default settings)
+						</a>
+					}
 				</header>
 				<div class="grid">
 					<button (click)="show = !show">Toggle (Custom plugin)</button>
@@ -46,10 +47,14 @@ type KeyframeProps = {
 				<footer [auto-animate]="bouncyPlugin">
 					<!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->
 					<h3>Footer content</h3>
-					<div *ngIf="show" [auto-animate]="{ duration: 250 }">
-						<!-- Explicit, inline setting: Affects the <p *ngFor> below -->
-						<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
-					</div>
+					@if (show) {
+						<div [auto-animate]="{ duration: 250 }">
+							<!-- Explicit, inline setting: Affects the <p *ngFor> below -->
+							@for (paragraph of paragraphs; track paragraph) {
+								<p>{{ paragraph }}</p>
+							}
+						</div>
+					}
 				</footer>
 			</article>
 		</main>
