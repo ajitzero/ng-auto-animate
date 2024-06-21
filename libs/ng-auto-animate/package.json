@@ -1,6 +1,6 @@
 {
 	"name": "ng-auto-animate",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Add motion to your apps with a single line of code. An Angular Directive to use FormKit's auto-animate library.",
 	"repository": "https://github.com/ajitzero/ng-auto-animate.git",
 	"homepage": "https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme",
@@ -9,7 +9,7 @@
 	"peerDependencies": {
 		"@angular/common": "^18.0.0",
 		"@angular/core": "^18.0.0",
-		"@formkit/auto-animate": "^0.8.0"
+		"@formkit/auto-animate": "^0.8.2"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
