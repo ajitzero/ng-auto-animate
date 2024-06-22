@@ -32,12 +32,6 @@
 		"lint": {
 			"executor": "@nx/eslint:lint",
 			"outputs": ["{options.outputFile}"]
-		},
-		"release": {
-			"executor": "nx-release:build-update-publish",
-			"options": {
-				"libName": "ng-auto-animate"
-			}
 		}
 	}
 }
