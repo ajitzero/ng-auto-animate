@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, InjectionToken, Input, computed, inject, input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, InjectionToken, computed, inject, input } from '@angular/core';
 import autoAnimate, { AutoAnimateOptions, AutoAnimationPlugin } from '@formkit/auto-animate';
 
 export type AutoAnimationConfig = Partial<AutoAnimateOptions> | AutoAnimationPlugin;

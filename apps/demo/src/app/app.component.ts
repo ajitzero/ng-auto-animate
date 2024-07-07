@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
 import { NgAutoAnimateDirective } from 'ng-auto-animate';
 
@@ -18,7 +17,7 @@ type KeyframeProps = {
 @Component({
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [RouterModule, NgAutoAnimateDirective],
+	imports: [NgAutoAnimateDirective],
 	selector: 'ng-auto-animate-root',
 	template: `
 		<main class="container">
