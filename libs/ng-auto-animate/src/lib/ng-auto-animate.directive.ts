@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, InjectionToken, computed, inject,
 import autoAnimate, { AutoAnimateOptions, AutoAnimationPlugin } from '@formkit/auto-animate';
 
 export type AutoAnimationConfig = Partial<AutoAnimateOptions> | AutoAnimationPlugin;
+
 const isPlugin = (config: AutoAnimationConfig) => typeof config === 'function';
 
 export const GLOBAL_AUTO_ANIMATE_OPTIONS = new InjectionToken<AutoAnimationConfig>(
