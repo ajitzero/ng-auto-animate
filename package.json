@@ -1,8 +1,12 @@
 {
 	"name": "ng-auto-animate",
-	"version": "0.3.2",
+	"version": "0.4.0",
 	"license": "MIT",
 	"scripts": {
+		"start": "nx serve demo",
+		"build": "nx run ng-auto-animate:build:production",
+		"publish": "pnpm publish dist/libs/ng-auto-animate",
+		"prepublish": "pnpm run format && pnpm run build",
 		"clean": "rimraf dist ./node_modules ./.angular",
 		"format": "prettier -w --cache **.{ts,js,json,html,scss,css}"
 	},
