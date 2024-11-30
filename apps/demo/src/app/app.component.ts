@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, model, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
 import { NgAutoAnimateDirective } from 'ng-auto-animate';
 
@@ -17,7 +18,7 @@ type KeyframeProps = {
 @Component({
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgAutoAnimateDirective],
+	imports: [NgAutoAnimateDirective, FormsModule],
 	selector: 'ng-auto-animate-root',
 	template: `
 		<main class="container">
@@ -38,6 +39,7 @@ type KeyframeProps = {
 						<a href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">
 							📝 View README (Slow transition, from global default settings)
 						</a>
+						<input type="number" [(ngModel)]="duration" />
 					}
 				</header>
 				<div class="grid">
@@ -46,9 +48,9 @@ type KeyframeProps = {
 				</div>
 				<footer [auto-animate]="bouncyPlugin">
 					<!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->
-					<h3>Footer content</h3>
+					<h3>Footer content {{ duration() }}</h3>
 					@if (showList()) {
-						<ol [auto-animate]="{ duration: 250 }">
+						<ol [auto-animate]="inputOptions()">
 							<!-- Explicit, inline setting: Affects the <p *ngFor> below -->
 							@for (paragraph of paragraphs(); track paragraph.id) {
 								<li>{{ paragraph.desc }}</li>
@@ -63,6 +65,9 @@ type KeyframeProps = {
 export class AppComponent {
 	showIntro = signal(false);
 	showList = signal(false);
+
+	duration = model(250);
+	inputOptions = computed(() => ({ duration: this.duration() }));
 
 	paragraphs = signal([
 		{ id: '1', desc: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.' },

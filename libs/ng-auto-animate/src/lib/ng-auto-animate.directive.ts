@@ -1,4 +1,14 @@
-import { Directive, ElementRef, InjectionToken, afterNextRender, computed, inject, input } from '@angular/core';
+import {
+	Directive,
+	ElementRef,
+	InjectionToken,
+	Injector,
+	afterNextRender,
+	computed,
+	effect,
+	inject,
+	input,
+} from '@angular/core';
 import autoAnimate, { AutoAnimateOptions, AutoAnimationPlugin } from '@formkit/auto-animate';
 
 export type AutoAnimationConfig = Partial<AutoAnimateOptions> | AutoAnimationPlugin;
@@ -17,6 +27,7 @@ export const GLOBAL_AUTO_ANIMATE_OPTIONS = new InjectionToken<AutoAnimationConfi
 	standalone: true,
 })
 export class NgAutoAnimateDirective {
+	private readonly _injector = inject(Injector);
 	private readonly _elementRef = inject(ElementRef);
 	private readonly _globalOptions = inject(GLOBAL_AUTO_ANIMATE_OPTIONS);
 
@@ -42,7 +53,12 @@ export class NgAutoAnimateDirective {
 
 	constructor() {
 		afterNextRender(() => {
-			autoAnimate(this._elementRef.nativeElement, this._options());
+			effect(
+				() => {
+					autoAnimate(this._elementRef.nativeElement, this._options());
+				},
+				{ injector: this._injector },
+			);
 		});
 	}
 }
