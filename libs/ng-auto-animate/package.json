@@ -7,8 +7,8 @@
 	"author": "Ajit Panigrahi <hello@ajitpanigrahi.com>",
 	"license": "MIT",
 	"peerDependencies": {
-		"@angular/common": "^18.0.0 - ^20.x",
-		"@angular/core": "^18.0.0 - ^20.x",
+		"@angular/common": "^18.0.0 - ^20.0.0",
+		"@angular/core": "^18.0.0 - ^20.0.0",
 		"@formkit/auto-animate": "^0.8.2"
 	},
 	"dependencies": {
