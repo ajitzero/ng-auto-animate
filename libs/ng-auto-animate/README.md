@@ -19,15 +19,15 @@ If there is a simpler solution, I would be willing to submit a PR with my change
 
 1. Install the peer dependency.
 
-    ```bash
-    npm i @formkit/auto-animate
-    ```
+   ```bash
+   npm i @formkit/auto-animate
+   ```
 
 1. Install this package.
 
-    ```bash
-    npm i ng-auto-animate
-    ```
+   ```bash
+   npm i ng-auto-animate
+   ```
 
 ## Usage
 
@@ -40,81 +40,78 @@ Adding the directive to the same tag which is being hidden will do nothing since
 ### Import Path
 
 Import and add the directive to your module or standalone component's imports array.
+
 ```ts
-import { NgAutoAnimateDirective } from 'ng-auto-animate'; 
+import { NgAutoAnimateDirective } from 'ng-auto-animate';
 ```
 
 ### Variants
 
 1. **Default usage.** This uses the default values configured by `@formkit/auto-animate`.
 
-    ```html
-    <article auto-animate>
-      <p *ngFor="let paragraph of paragraphs">
-        {{ paragraph }}
-      </p>
-    </article>
-    ```
+   ```html
+   <article auto-animate>
+   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+   </article>
+   ```
 
 1. **Pass one-off options.** Inline options will completely replace/override the default options.
 
-    ```html
-    <article [auto-animate]="{ duration: 750 }">
-      <p *ngFor="let paragraph of paragraphs">
-        {{ paragraph }}
-      </p>
-    </article>
-    ```
+   ```html
+   <article [auto-animate]="{ duration: 750 }">
+   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+   </article>
+   ```
 
 1. **Global options.** The ideal place to configure common settings across your app.
 
-    ```ts
-    // src/app/app.config.ts
-    import { ApplicationConfig } from '@angular/core';
-    import { GLOBAL_AUTO_ANIMATE_OPTIONS } from 'ng-auto-animate';
+   ```ts
+   // src/app/app.config.ts
+   import { ApplicationConfig } from '@angular/core';
+   import { GLOBAL_AUTO_ANIMATE_OPTIONS } from 'ng-auto-animate';
 
-    export const appConfig: ApplicationConfig = {
-      providers: [
-        {
-          provide: GLOBAL_AUTO_ANIMATE_OPTIONS,
-          useValue: {
-            duration: 750,
-            easing: 'ease-out',
-            // etc.
-          },
-        },
-        // other providers
-      ],
-    };
+   export const appConfig: ApplicationConfig = {
+   	providers: [
+   		{
+   			provide: GLOBAL_AUTO_ANIMATE_OPTIONS,
+   			useValue: {
+   				duration: 750,
+   				easing: 'ease-out',
+   				// etc.
+   			},
+   		},
+   		// other providers
+   	],
+   };
 
-    // main.ts
-    import { bootstrapApplication } from '@angular/platform-browser';
-    import { appConfig } from './app/app.config';
-    import { AppComponent } from './app/app.component';
+   // main.ts
+   import { bootstrapApplication } from '@angular/platform-browser';
+   import { appConfig } from './app/app.config';
+   import { AppComponent } from './app/app.component';
 
-    bootstrapApplication(AppComponent, appConfig).catch((err) =>
-      console.error(err)
-    );
-    ```
+   bootstrapApplication(AppComponent, appConfig).catch(err =>
+   	console.error(err),
+   );
+   ```
 
-    ```html
-    <article auto-animate> <!-- Default usage -->
-      <p *ngFor="let paragraph of paragraphs">
-        {{ paragraph }}
-      </p>
-    </article>
-    ```
+   ```html
+   <article auto-animate>
+   	<!-- Default usage -->
+   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+   </article>
+   ```
 
 1. **Custom plugins.** Same support as `@formkit/auto-animate`.
-    > See the example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/0f305d97a9a30ab715b1c41304572519f0d27894/apps/demo/src/app/app.component.ts#L68) for a "bouncy" effect.
 
-    ```ts
-    customPlugin: AutoAnimationPlugin = (...) => {...};
-    ```
+   > See the example here in the [demo app](https://github.com/ajitzero/ng-auto-animate/blob/0f305d97a9a30ab715b1c41304572519f0d27894/apps/demo/src/app/app.component.ts#L68) for a "bouncy" effect.
 
-    ```html
-    <article [auto-animate]="customPlugin">...</article>
-    ```
+   ```ts
+   customPlugin: AutoAnimationPlugin = (...) => {...};
+   ```
+
+   ```html
+   <article [auto-animate]="customPlugin">...</article>
+   ```
 
 ## Missing support for something?
 

@@ -1,7 +1,21 @@
 {
 	"arrowParens": "avoid",
 	"htmlWhitespaceSensitivity": "ignore",
-	"plugins": ["prettier-plugin-organize-imports"],
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-packagejson",
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-multiline-arrays",
+    "prettier-plugin-tailwindcss"
+  ],
 	"printWidth": 120,
 	"singleQuote": true,
 	"tabWidth": 2,

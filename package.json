@@ -3,12 +3,17 @@
 	"version": "0.4.2",
 	"license": "MIT",
 	"scripts": {
-		"start": "nx serve demo",
 		"build": "nx run ng-auto-animate:build:production",
-		"publish": "pnpm publish dist/libs/ng-auto-animate",
+		"clean": "./node_modules/.bin/rimraf dist ./node_modules ./.angular",
+		"format": "./node_modules/.bin/prettier -w --cache **.{ts,js,json,html,scss,css,md}",
 		"prepublish": "pnpm run format && pnpm run build",
-		"clean": "rimraf dist ./node_modules ./.angular",
-		"format": "prettier -w --cache **.{ts,js,json,html,scss,css}"
+		"publish": "pnpm publish dist/libs/ng-auto-animate",
+		"start": "nx serve demo"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	},
 	"dependencies": {
 		"@angular/animations": "18.2.13",
@@ -66,17 +71,16 @@
 		"postcss-import": "~14.1.0",
 		"postcss-preset-env": "~7.5.0",
 		"postcss-url": "~10.1.3",
-		"prettier": "^3.4.1",
+		"prettier": "^3.5.3",
+"prettier-plugin-multiline-arrays": "^4.0.3",
+		"prettier-plugin-organize-attributes": "^1.0.0",
 		"prettier-plugin-organize-imports": "^4.1.0",
+"prettier-plugin-packagejson": "^2.5.15",
+		"prettier-plugin-tailwindcss": "^0.6.12",
 		"replace-json-property": "^1.9.0",
 		"rimraf": "^5.0.10",
 		"ts-jest": "^29.2.5",
 		"ts-node": "10.9.1",
 		"typescript": "5.5.4"
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
 	}
 }

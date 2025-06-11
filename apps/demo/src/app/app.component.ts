@@ -39,12 +39,12 @@ type KeyframeProps = {
 						<a href="https://github.com/ajitzero/ng-auto-animate/tree/main/libs/ng-auto-animate#readme">
 							📝 View README (Slow transition, from global default settings)
 						</a>
-						<input type="number" [(ngModel)]="duration" />
+						<input [(ngModel)]="duration" type="number" />
 					}
 				</header>
 				<div class="grid">
 					<button (click)="toggleList()">Toggle (Custom plugin)</button>
-					<button (click)="shuffle()" [disabled]="!showList()">Shuffle (Explicit, inline settings)</button>
+					<button [disabled]="!showList()" (click)="shuffle()">Shuffle (Explicit, inline settings)</button>
 				</div>
 				<footer [auto-animate]="bouncyPlugin">
 					<!-- Custom plugin: Affects the <div *ngIf> below, but not its children -->

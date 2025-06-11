@@ -4,7 +4,6 @@ about: Suggest an idea for this project
 title: 'feat: Support X when Y'
 labels: enhancement, unconfirmed
 assignees: ajitzero
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
