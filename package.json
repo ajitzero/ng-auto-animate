@@ -1,6 +1,6 @@
 {
 	"name": "ng-auto-animate",
-	"version": "0.4.2",
+	"version": "0.4.3",
 	"license": "MIT",
 	"scripts": {
 		"build": "nx run ng-auto-animate:build:production",
@@ -72,10 +72,10 @@
 		"postcss-preset-env": "~7.5.0",
 		"postcss-url": "~10.1.3",
 		"prettier": "^3.5.3",
-"prettier-plugin-multiline-arrays": "^4.0.3",
+		"prettier-plugin-multiline-arrays": "^4.0.3",
 		"prettier-plugin-organize-attributes": "^1.0.0",
 		"prettier-plugin-organize-imports": "^4.1.0",
-"prettier-plugin-packagejson": "^2.5.15",
+		"prettier-plugin-packagejson": "^2.5.15",
 		"prettier-plugin-tailwindcss": "^0.6.12",
 		"replace-json-property": "^1.9.0",
 		"rimraf": "^5.0.10",
