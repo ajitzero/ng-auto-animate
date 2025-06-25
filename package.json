@@ -8,8 +8,7 @@
 		"format": "./node_modules/.bin/prettier -w --cache **.{ts,js,json,html,scss,css,md}",
 		"prepublish": "pnpm run format && pnpm run build",
 		"publish": "pnpm publish dist/libs/ng-auto-animate",
-		"start": "nx serve demo",
-		"prepare": "husky install"
+		"start": "nx serve demo"
 	},
 	"config": {
 		"commitizen": {
@@ -40,8 +39,6 @@
 		"@angular/cli": "~18.2.12",
 		"@angular/compiler-cli": "18.2.13",
 		"@angular/language-service": "18.2.13",
-		"@commitlint/cli": "^19.8.1",
-		"@commitlint/config-conventional": "^19.8.1",
 		"@nx/cypress": "20.1.4",
 		"@nx/eslint": "20.1.4",
 		"@nx/eslint-plugin": "20.1.4",
@@ -65,7 +62,6 @@
 		"eslint": "9.16.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-cypress": "2.15.2",
-		"husky": "^9.1.7",
 		"jest": "29.7.0",
 		"jest-environment-jsdom": "29.7.0",
 		"jest-preset-angular": "14.1.1",
