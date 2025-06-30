@@ -6,6 +6,7 @@ An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.form
 
 - ✅ Standalone Directive, for Angular v17 and above. Tested on Node 20.x, but should work on previous versions.
 - ✅ Custom `InjectionToken` for configuring global settings and plugins.
+- ✅ Works in SSR-based apps, after the view is initialized on the client-side.
 
 ## Why a new wrapper library?
 
