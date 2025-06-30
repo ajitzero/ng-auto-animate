@@ -4,38 +4,41 @@ An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.form
 
 ## Highlights
 
-- ✅ Standalone Directive, for Angular v14 and above. Tested on Node 18.x, but should work on previous versions.
+- ✅ Standalone Directive, for Angular v17 and above. Tested on Node 20.x, but should work on previous versions.
 - ✅ Custom `InjectionToken` for configuring global settings and plugins.
 
 ## Why a new wrapper library?
 
 A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial task and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
 
-[Justin Schroeder](https://github.com/justin-schroeder), the creator of [`auto-animate`](https://auto-animate.formkit.com), has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts and the project structure, all to support a single framework.
+[Justin Schroeder](https://github.com/justin-schroeder), the creator of [`auto-animate`](https://auto-animate.formkit.com), has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts, and the project structure, all to support a single framework.
 
 If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project, especially the support for global options/plugin via an `InjectionToken`.
 
 ## Installation
 
-1. Install the peer dependency.
+Install this package and its peer dependency with the package manager of your choice.
 
    ```bash
-   npm i @formkit/auto-animate
+   npm i ng-auto-animate @formkit/auto-animate
    ```
-
-1. Install this package.
-
    ```bash
-   npm i ng-auto-animate
+   pnpm i ng-auto-animate @formkit/auto-animate
+   ```
+   ```bash
+   bun add ng-auto-animate @formkit/auto-animate
+   ```
+   ```bash
+   yarn add ng-auto-animate @formkit/auto-animate
    ```
 
 ## Usage
 
 ### Principle
 
-Add the directive to the parent tag, within which DOM elements are being shown or hidden dynamically.
+Add the directive to the parent tag, within which DOM elements are being dynamically shown or hidden.
 
-Adding the directive to the same tag which is being hidden will do nothing since it will look for changes in child nodes only.
+Applying the directive to the same tag being hidden will have no effect, as it only detects changes in child nodes.
 
 ### Import Path
 
@@ -55,7 +58,7 @@ import { NgAutoAnimateDirective } from 'ng-auto-animate';
    </article>
    ```
 
-1. **Pass one-off options.** Inline options will completely replace/override the default options.
+1. **Pass one-off options.** Inline options will completely replace and override the default options.
 
    ```html
    <article [auto-animate]="{ duration: 750 }">
@@ -63,7 +66,7 @@ import { NgAutoAnimateDirective } from 'ng-auto-animate';
    </article>
    ```
 
-1. **Global options.** The ideal place to configure common settings across your app.
+1. **Global options.** The ideal place to configure standard settings across your app.
 
    ```ts
    // src/app/app.config.ts
@@ -115,7 +118,7 @@ import { NgAutoAnimateDirective } from 'ng-auto-animate';
 
 ## Missing support for something?
 
-Go through existing issues if your problem is already being tracked; otherwise, [raise an issue!](https://github.com/ajitzero/ng-auto-animate/issues/new/choose)
+Go through existing issues if your problem is tracked; if not, please [raise a new issue!](https://github.com/ajitzero/ng-auto-animate/issues/new/choose)
 
 ## License
 
