@@ -15,13 +15,21 @@ An Angular Directive for FormKit's [`auto-animate`](https://auto-animate.formkit
 - ✅ Custom `InjectionToken` for configuring global settings and plugins.
 - ✅ SSR-safe, running only after the view is initialized on the client-side.
 
-## Why a new wrapper library?
+<!--
 
-A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and finalized formatting. Migrating the repository structure for `auto-animate` is a non-trivial task and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
+Some lore for folks lurking in the code:
+
+## Why a separate wrapper library?
+
+TLDR; Issues with setting up builds in original repo.
+
+A publishable library for Angular needs [`ng-packagr`](https://github.com/ng-packagr/ng-packagr) and Angular CLI for proper scaffolding and formatting. Migrating the repository structure for `auto-animate` is a non-trivial task and would need an unbiased build system like [Nx](https://nx.dev) (which I am using here) or some other similar tool.
 
 [Justin Schroeder](https://github.com/justin-schroeder), the creator of [`auto-animate`](https://auto-animate.formkit.com), has been supportive towards [contributions](https://github.com/formkit/auto-animate/pull/38) for Angular integration, but he [does not work with Angular](https://github.com/formkit/auto-animate/issues/72#issuecomment-1222732238) and is unable to work towards this actively. I, too, would not be able to do much in his shoes, especially when it requires replacing all build actions, scripts, and the project structure, all to support a single framework.
 
 If there is a simpler solution, I would be willing to submit a PR with my changes here to the original project, especially the support for global options/plugin via an `InjectionToken`.
+
+-->
 
 ## Installation
 
@@ -65,8 +73,8 @@ import { NgAutoAnimate } from 'ng-auto-animate';
 
    ```angular
    <article auto-animate>
-     @for (paragraph of paragraphs; track paragraph) {
-       <p>{{ paragraph }}</p>
+     @if (shouldShow()) {
+       <p>Conditionally shown element</p>
      }
    </article>
    ```
@@ -75,7 +83,7 @@ import { NgAutoAnimate } from 'ng-auto-animate';
 
    ```angular
    <article [auto-animate]="{ duration: 750 }">
-     @for (paragraph of paragraphs; track paragraph) {
+     @if (shouldShow()) {
        <p>{{ paragraph }}</p>
      }
    </article>
@@ -130,6 +138,12 @@ import { NgAutoAnimate } from 'ng-auto-animate';
 ## Missing support for something?
 
 Go through existing issues if your problem is tracked; if not, please [raise a new issue!](https://github.com/ajitzero/ng-auto-animate/issues/new/choose)
+
+## Support us
+
+Is AutoAnimate saving you time?
+
+Please consider [supporting us with a recurring or one-time donation](https://github.com/sponsors/ajitzero)! 🙏
 
 ## License
 
