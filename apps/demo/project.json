@@ -8,14 +8,21 @@
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:browser",
-			"outputs": ["{options.outputPath}"],
+			"outputs": [
+				"{options.outputPath}"
+			],
 			"options": {
 				"outputPath": "dist/apps/demo",
 				"index": "apps/demo/src/index.html",
 				"main": "apps/demo/src/main.ts",
 				"tsConfig": "apps/demo/tsconfig.app.json",
-				"assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"],
-				"styles": ["apps/demo/src/styles.scss"],
+				"assets": [
+					"apps/demo/src/favicon.ico",
+					"apps/demo/src/assets"
+				],
+				"styles": [
+					"apps/demo/src/styles.scss"
+				],
 				"scripts": []
 			},
 			"configurations": {
@@ -55,7 +62,8 @@
 					"buildTarget": "demo:build:development"
 				}
 			},
-			"defaultConfiguration": "development"
+			"defaultConfiguration": "development",
+			"continuous": true
 		},
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",
@@ -65,11 +73,15 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"]
+			"outputs": [
+				"{options.outputFile}"
+			]
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
-			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"outputs": [
+				"{workspaceRoot}/coverage/{projectRoot}"
+			],
 			"options": {
 				"jestConfig": "apps/demo/jest.config.ts"
 			}
