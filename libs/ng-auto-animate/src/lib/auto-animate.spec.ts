@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgAutoAnimateDirective } from './auto-animate';
+import { NgAutoAnimate } from './auto-animate';
 
 @Component({
 	standalone: true,
 	selector: 'ng-auto-animate-mock-comp',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgAutoAnimateDirective],
+	imports: [NgAutoAnimate],
 	template: `
 		<div auto-animate>
 			@for (item of data(); track item) {
@@ -16,7 +16,7 @@ import { NgAutoAnimateDirective } from './auto-animate';
 		<button (click)="updateData()">Add</button>
 	`,
 })
-class MockCompForNgAutoAnimateDirectiveComponent {
+class MockCompForNgAutoAnimateComponent {
 	data = signal([1, 2]);
 
 	updateData() {
@@ -24,14 +24,14 @@ class MockCompForNgAutoAnimateDirectiveComponent {
 	}
 }
 
-describe('NgAutoAnimateDirective', () => {
-	let fixture: ComponentFixture<MockCompForNgAutoAnimateDirectiveComponent>;
+describe('NgAutoAnimate', () => {
+	let fixture: ComponentFixture<MockCompForNgAutoAnimateComponent>;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [NgAutoAnimateDirective, MockCompForNgAutoAnimateDirectiveComponent],
+			imports: [NgAutoAnimate, MockCompForNgAutoAnimateComponent],
 		});
-		fixture = TestBed.createComponent(MockCompForNgAutoAnimateDirectiveComponent);
+		fixture = TestBed.createComponent(MockCompForNgAutoAnimateComponent);
 		fixture.detectChanges();
 	});
 

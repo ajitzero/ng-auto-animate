@@ -46,7 +46,7 @@ Applying the directive to the same tag being hidden will have no effect, as it o
 Import and add the directive to your module or standalone component's imports array.
 
 ```ts
-import { NgAutoAnimateDirective } from 'ng-auto-animate';
+import { NgAutoAnimate } from 'ng-auto-animate';
 ```
 
 ### Variants

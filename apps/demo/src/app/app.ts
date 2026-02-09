@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoAnimationPlugin, getTransitionSizes } from '@formkit/auto-animate';
-import { NgAutoAnimateDirective } from 'ng-auto-animate';
+import { NgAutoAnimate } from 'ng-auto-animate';
 
 /*
  * This is a helper type only. The original example is in JavaScript, not TypeScript, so no type is exported.
@@ -18,7 +18,7 @@ type KeyframeProps = {
 @Component({
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgAutoAnimateDirective, FormsModule],
+	imports: [NgAutoAnimate, FormsModule],
 	selector: 'ng-auto-animate-root',
 	template: `
 		<main class="container">

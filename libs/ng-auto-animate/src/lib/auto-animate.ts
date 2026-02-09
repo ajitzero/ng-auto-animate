@@ -26,7 +26,7 @@ export const GLOBAL_AUTO_ANIMATE_OPTIONS = new InjectionToken<AutoAnimationConfi
 	selector: '[auto-animate]',
 	standalone: true,
 })
-export class NgAutoAnimateDirective {
+export class NgAutoAnimate {
 	private readonly _injector = inject(Injector);
 	private readonly _elementRef = inject(ElementRef);
 	private readonly _globalOptions = inject(GLOBAL_AUTO_ANIMATE_OPTIONS);
