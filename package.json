@@ -1,13 +1,13 @@
 {
 	"name": "ng-auto-animate",
-	"version": "0.4.4",
+	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
 		"build": "nx run ng-auto-animate:build:production",
 		"clean": "bunx rimraf dist ./node_modules ./.angular ./.nx",
 		"format": "bunx prettier --write .",
 		"prepublish": "bun run format && bun run build",
-		"publish": "bun publish dist/libs/ng-auto-animate",
+		"publish": "npm publish dist/libs/ng-auto-animate",
 		"start": "nx serve demo"
 	},
 	"config": {
