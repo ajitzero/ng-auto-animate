@@ -1,12 +1,19 @@
 # ng-auto-animate
 
-An Angular Directive to use FormKit's [`auto-animate`](https://auto-animate.formkit.com) library within Angular projects.
+An Angular Directive for FormKit's [`auto-animate`](https://auto-animate.formkit.com) library.
+
+**Demo** → [https://ng-auto-animate.netlify.app/](https://ng-auto-animate.netlify.app/)
+
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License"/></a>
+<a href="https://www.npmjs.com/package/ng-auto-animate" title="View this project on NPM"><img src="https://img.shields.io/npm/v/ng-auto-animate" alt="NPM version" /></a>
+<a href="https://www.npmjs.com/package/ng-auto-animate" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/ng-auto-animate" alt="NPM downloads" /></a>
 
 ## Highlights
 
-- ✅ Standalone Directive, for Angular v17 and above. Tested on Node 20.x, but should work on previous versions.
+- ✅ Standalone Directive, for Angular v17 and above.
+- ✅ Zoneless & signals-first. RxJS is not required.
 - ✅ Custom `InjectionToken` for configuring global settings and plugins.
-- ✅ Works in SSR-based apps, after the view is initialized on the client-side.
+- ✅ SSR-safe, running only after the view is initialized on the client-side.
 
 ## Why a new wrapper library?
 
@@ -20,18 +27,21 @@ If there is a simpler solution, I would be willing to submit a PR with my change
 
 Install this package and its peer dependency with the package manager of your choice.
 
-   ```bash
-   npm i ng-auto-animate @formkit/auto-animate
-   ```
-   ```bash
-   pnpm i ng-auto-animate @formkit/auto-animate
-   ```
-   ```bash
-   bun add ng-auto-animate @formkit/auto-animate
-   ```
-   ```bash
-   yarn add ng-auto-animate @formkit/auto-animate
-   ```
+```bash
+npm i ng-auto-animate @formkit/auto-animate
+```
+
+```bash
+pnpm i ng-auto-animate @formkit/auto-animate
+```
+
+```bash
+bun add ng-auto-animate @formkit/auto-animate
+```
+
+```bash
+yarn add ng-auto-animate @formkit/auto-animate
+```
 
 ## Usage
 
@@ -53,55 +63,55 @@ import { NgAutoAnimate } from 'ng-auto-animate';
 
 1. **Default usage.** This uses the default values configured by `@formkit/auto-animate`.
 
-   ```html
+   ```angular
    <article auto-animate>
-   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+     @for (paragraph of paragraphs; track paragraph) {
+       <p>{{ paragraph }}</p>
+     }
    </article>
    ```
 
 1. **Pass one-off options.** Inline options will completely replace and override the default options.
 
-   ```html
+   ```angular
    <article [auto-animate]="{ duration: 750 }">
-   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+     @for (paragraph of paragraphs; track paragraph) {
+       <p>{{ paragraph }}</p>
+     }
    </article>
    ```
 
-1. **Global options.** The ideal place to configure standard settings across your app.
+1. **Global options.** The ideal place to configure standard settings across your app. The supported values are `Partial<AutoAnimateOptions> | AutoAnimationPlugin`
 
    ```ts
    // src/app/app.config.ts
    import { ApplicationConfig } from '@angular/core';
-   import { GLOBAL_AUTO_ANIMATE_OPTIONS } from 'ng-auto-animate';
+   import { provideAutoAnimateConfig } from 'ng-auto-animate';
+   import type {
+     AutoAnimateOptions, // Standard options like easing, duration, etc.
+     AutoAnimationPlugin, // Custom plugins
+   } from '@formkit/auto-animate';
 
    export const appConfig: ApplicationConfig = {
-   	providers: [
-   		{
-   			provide: GLOBAL_AUTO_ANIMATE_OPTIONS,
-   			useValue: {
-   				duration: 750,
-   				easing: 'ease-out',
-   				// etc.
-   			},
-   		},
-   		// other providers
-   	],
+     providers: [
+       provideAutoAnimateConfig({ duration: 1000, easing: 'ease-out' }),
+     ],
    };
 
    // main.ts
    import { bootstrapApplication } from '@angular/platform-browser';
    import { appConfig } from './app/app.config';
-   import { AppComponent } from './app/app.component';
+   import { App } from './app/app';
 
-   bootstrapApplication(AppComponent, appConfig).catch(err =>
-   	console.error(err),
-   );
+   bootstrapApplication(App, appConfig).catch(err => console.error(err));
    ```
 
-   ```html
+   ```angular
    <article auto-animate>
-   	<!-- Default usage -->
-   	<p *ngFor="let paragraph of paragraphs">{{ paragraph }}</p>
+     <!-- Default usage -->
+     @for (paragraph of paragraphs; track paragraph) {
+       <p>{{ paragraph }}</p>
+     }
    </article>
    ```
 
@@ -126,7 +136,3 @@ Go through existing issues if your problem is tracked; if not, please [raise a n
 [MIT](https://github.com/ajitzero/ng-auto-animate/blob/main/LICENSE).
 
 Built by [Ajit Panigrahi](https://github.com/ajitzero). Original library by [Justin Schroeder](https://github.com/justin-schroeder) and many contributors.
-
----
-
-This library was generated with [Nx](https://nx.dev).
