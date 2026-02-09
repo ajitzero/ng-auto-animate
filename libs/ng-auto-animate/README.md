@@ -135,6 +135,19 @@ import { NgAutoAnimate } from 'ng-auto-animate';
    <article [auto-animate]="customPlugin">...</article>
    ```
 
+1. **Disable animations.** `prefers-reduced-motion` is already respected. Additionally, we can explicitly disable animations like this:
+
+   ```angular
+   <article
+     [auto-animate]="{ duration: 750 }"
+     [disableAutoAnimate]="shouldDisableAnimations()"
+   >
+     @if (shouldShow()) {
+       <p>{{ paragraph }}</p>
+     }
+   </article>
+   ```
+
 ## Missing support for something?
 
 Go through existing issues if your problem is tracked; if not, please [raise a new issue!](https://github.com/ajitzero/ng-auto-animate/issues/new/choose)
