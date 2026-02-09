@@ -1,6 +1,6 @@
 {
 	"name": "ng-auto-animate",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Add motion to your apps with a single line of code. An Angular Directive to use FormKit's auto-animate library.",
 	"keywords": [
 		"angular",
