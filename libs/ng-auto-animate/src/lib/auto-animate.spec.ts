@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgAutoAnimateDirective } from './ng-auto-animate.directive';
+import { NgAutoAnimateDirective } from './auto-animate';
 
 @Component({
 	standalone: true,

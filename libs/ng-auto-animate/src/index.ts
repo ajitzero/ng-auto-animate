@@ -1,1 +1,1 @@
-export * from './lib/ng-auto-animate.directive';
+export * from './lib/auto-animate';
