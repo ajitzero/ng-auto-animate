@@ -1,21 +1,22 @@
 {
 	"arrowParens": "avoid",
 	"htmlWhitespaceSensitivity": "ignore",
-  "overrides": [
-    {
-      "files": "*.md",
-      "options": {
-        "printWidth": 80
-      }
-    }
-  ],
-  "plugins": [
-    "prettier-plugin-packagejson",
-    "prettier-plugin-organize-imports",
-    "prettier-plugin-organize-attributes",
-    "prettier-plugin-multiline-arrays",
-    "prettier-plugin-tailwindcss"
-  ],
+	"overrides": [
+		{
+			"files": "*.md",
+			"options": {
+				"useTabs": false,
+				"printWidth": 80
+			}
+		}
+	],
+	"plugins": [
+		"prettier-plugin-packagejson",
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-organize-attributes",
+		"prettier-plugin-multiline-arrays",
+		"prettier-plugin-tailwindcss"
+	],
 	"printWidth": 120,
 	"singleQuote": true,
 	"tabWidth": 2,
