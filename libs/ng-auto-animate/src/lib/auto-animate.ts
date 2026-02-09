@@ -1,4 +1,14 @@
-import { Directive, ElementRef, Injector, afterNextRender, computed, effect, inject, input } from '@angular/core';
+import {
+	Directive,
+	ElementRef,
+	Injector,
+	afterNextRender,
+	booleanAttribute,
+	computed,
+	effect,
+	inject,
+	input,
+} from '@angular/core';
 import autoAnimate from '@formkit/auto-animate';
 import { isPlugin } from './is-plugin';
 import { type AutoAnimationConfig, AUTO_ANIMATE_CONFIG } from './tokens';
@@ -9,9 +19,17 @@ export class NgAutoAnimate {
 	private readonly _elementRef = inject(ElementRef);
 	private readonly _globalOptions = inject(AUTO_ANIMATE_CONFIG);
 
+	public readonly disableAutoAnimate = input(false, { transform: booleanAttribute });
 	public readonly autoAnimateOptions = input<AutoAnimationConfig | string>('', { alias: 'auto-animate' });
+
 	private readonly _options = computed(() => {
+		const disabled = this.disableAutoAnimate();
 		const localOptions = this.autoAnimateOptions();
+
+		if (disabled) {
+			// Exit early. These options won't be passed anyway.
+			return {};
+		}
 
 		if (typeof localOptions === 'string') {
 			// Default case, when no options or plugin is passed
@@ -36,7 +54,12 @@ export class NgAutoAnimate {
 		afterNextRender(() => {
 			effect(
 				() => {
-					autoAnimate(this._elementRef.nativeElement, this._options());
+					const disabled = this.disableAutoAnimate();
+					const options = this._options();
+
+					if (!disabled) {
+						autoAnimate(this._elementRef.nativeElement, options);
+					}
 				},
 				{ injector: this._injector },
 			);
