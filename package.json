@@ -4,10 +4,10 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "nx run ng-auto-animate:build:production",
-		"clean": "./node_modules/.bin/rimraf dist ./node_modules ./.angular",
-		"format": "./node_modules/.bin/prettier -w --cache **.{ts,js,json,html,scss,css,md}",
-		"prepublish": "pnpm run format && pnpm run build",
-		"publish": "pnpm publish dist/libs/ng-auto-animate",
+		"clean": "bunx rimraf dist ./node_modules ./.angular ./.nx",
+		"format": "bunx prettier --write .",
+		"prepublish": "bun run format && bun run build",
+		"publish": "bun publish dist/libs/ng-auto-animate",
 		"start": "nx serve demo"
 	},
 	"config": {
